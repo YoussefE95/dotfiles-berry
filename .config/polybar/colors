@@ -1,0 +1,17 @@
+## Copyright (C) 2020-2023 Aditya Shakya <adi1090x@gmail.com>
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[color]
+BG = #282828
+FG = #ddc7a1
+
+red = #ea6962
+green = #a9b665
+yellow = #d8a657
+blue = #7daea3
+magenta = #d3869b
+cyan = #89b482
+orange = #e78a4e
+gray = #7c6f64
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_

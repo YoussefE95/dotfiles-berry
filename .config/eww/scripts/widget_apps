@@ -1,0 +1,35 @@
+#!/bin/bash
+
+if [[ "$1" == "--gmail" ]]; then
+	firefox --new-tab "https://mail.google.com" &
+
+elif [[ "$1" == "--calendar" ]]; then
+	firefox --new-tab "https://calendar.google.com" &
+
+elif [[ "$1" == "--docs" ]]; then
+	firefox --new-tab "https://docs.google.com" &
+
+elif [[ "$1" == "--slides" ]]; then
+	firefox --new-tab "https://slides.google.com" &
+
+elif [[ "$1" == "--csula" ]]; then
+	firefox --new-tab "https://my.calstatela.edu" &
+
+elif [[ "$1" == "--slack" ]]; then
+	slack &
+
+elif [[ "$1" == "--discord" ]]; then
+	discord &
+
+elif [[ "$1" == "--spotify" ]]; then
+    alacritty -o "window.dimensions.columns=85" -o "window.dimensions.lines=30"  --command spt &
+
+elif [[ "$1" == "--nm" ]]; then
+	alacritty --command nmtui &
+
+elif [[ "$1" == "--vl" ]]; then
+    pavucontrol &
+
+elif [[ "$1" == "--bt" ]]; then
+    blueberry &
+fi

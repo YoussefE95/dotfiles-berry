@@ -1,0 +1,13 @@
+#!/bin/bash
+
+activeWorkspaces=$(wmctrl -l | cut -d ' ' -f 3 | uniq | tr '\n' ' ')
+currentWorkspace=$(wmctrl -d | grep '*' | cut -d ' ' -f 1)
+
+for i in {0..8}
+do
+    if [[ "$currentWorkspace" == "$i" ]]; then
+        printf " | $(echo $i + 1 | bc) | "
+    else
+        printf " $(echo $i + 1 | bc) "
+    fi
+done

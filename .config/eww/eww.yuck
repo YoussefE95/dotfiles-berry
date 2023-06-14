@@ -1,0 +1,143 @@
+(defpoll theme :interval "120s" `get-theme`)
+(defpoll mode :interval "120s" `get-theme --mode`)
+
+(defwidget dashboard []
+  (box
+  :orientation "v"
+  (box
+    :class "apps"
+    :orientation "v"
+    :halign "center"
+    :valign "top"
+    (box
+      :orientation "h"
+      :halign "center"
+      :valign "top"
+      (button
+        :style "background-image: url('icons/gmail.svg');"
+        :class "appicon"
+        :onclick "scripts/widget_apps --gmail"
+      )
+      (button
+        :style "background-image: url('icons/calendar.svg');"
+        :class "appicon"
+        :onclick "scripts/widget_apps --calendar"
+      )
+      (button
+        :style "background-image: url('icons/docs.svg');"
+        :class "appicon"
+        :onclick "scripts/widget_apps --docs"
+      )
+      (button
+        :style "background-image: url('icons/slides.svg');"
+        :class "appicon"
+        :onclick "scripts/widget_apps --slides"
+      )
+    )
+    (box
+      :orientation "h"
+      :halign "center"
+      :valign "bottom"
+      (button
+        :style "background-image: url('icons/browser.svg');"
+        :class "appicon"
+        :onclick "scripts/widget_apps --csula"
+      )
+      (button
+        :style "background-image: url('icons/slack.svg');"
+        :class "appicon"
+        :onclick "scripts/widget_apps --slack"
+      )
+      (button
+        :style "background-image: url('icons/discord.svg');"
+        :class "appicon"
+        :onclick "scripts/widget_apps --discord"
+      )
+      (button
+        :style "background-image: url('icons/spotify.svg');"
+        :class "appicon"
+        :onclick "scripts/widget_apps --spotify"
+      )
+    )
+  )
+  (box
+    :class "theme"
+    :orientation "h"
+    :halign "center"
+    :valign "center"
+    (box
+      :orientation "v"
+      :halign "center"
+      :valign "center"
+      (button
+        :onclick `set-theme catppuccin $(get-theme --mode)`
+        :class {theme == "catppuccin" ? "active-theme" : ""} 
+        "Catppuccin"
+      )
+      (button
+        :onclick `set-theme gruvbox $(get-theme --mode)`
+        :class {theme == "gruvbox" ? "active-theme" : ""}
+        "Gruvbox"
+      )
+      (button
+        :onclick `set-theme rose-pine $(get-theme --mode)`
+        :class {theme == "rose-pine" ? "active-theme" : ""}
+        "Rose Pine"
+      )
+   )
+    (box
+      :class "mode-options"
+      :orientation "v"
+      :halign "center"
+      :valign "center"
+      (button
+        :onclick `set-theme $(get-theme) light`
+        :class {mode == "light" ? "active-mode" : ""}
+        "Light"
+      )
+      (button
+        :onclick `set-theme $(get-theme)`
+        :class {mode == "normal" ? "active-mode" : ""}
+        "Medium"
+      )
+      (button
+        :onclick `set-theme $(get-theme) dark`
+        :class {mode == "dark" ? "active-mode" : ""}
+        "Dark"
+      )
+    ) 
+  )
+  (box
+    :orientation "h"
+    :halign "center"
+    :valign "bottom"
+    (button
+      :class "powermenu-icon poweroff"
+      :onclick `poweroff`
+      "⏻ "
+    )
+    (button
+      :class "powermenu-icon reboot"
+      :onclick `reboot`
+      " "
+    )
+    (button
+      :class "powermenu-icon logout"
+      :onclick `berryc quit`
+      " "
+    )
+  ))
+)
+
+(defwindow dashboard
+           :monitor 0
+           :geometry (geometry :x "0px"
+                               :y "0px"
+                               :width "325px"
+                               :height "460px"
+                               :anchor "center")
+           :stacking "fg"
+           :windowtype "dock"
+           :wm-ignore false
+  (dashboard)
+)

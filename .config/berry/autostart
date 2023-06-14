@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Set decoration geometry
+berryc border_width 		0
+berryc inner_border_width 	6
+berryc title_height 		18
+berryc edge_gap             80 35 10 10
+
+# Other options
+berryc smart_place  "true"
+berryc draw_text    "true"
+berryc edge_lock    "true"
+berryc decorate_new "true"
+berryc set_font     "SFMono-11"
+
+/usr/bin/lxpolkit &
+picom &
+stalonetray --transparent --geometry=5x1-30+1050 --icon-size=24 --icon-gravity=NE --grow-gravity=SW --sticky=true &
+# eww daemon &
+sh ~/.config/polybar/launch.sh
+reapply-theme
+dropbox &

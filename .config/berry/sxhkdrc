@@ -1,0 +1,68 @@
+#
+# wm independent hotkeys
+#
+
+# internet browser
+super + w
+    firefox
+
+# terminal emulator
+super + t
+	alacritty
+
+# program launcher
+super + shift + space
+	$HOME/.config/berry/dmenu.sh
+
+super + space
+    eww open --toggle dashboard
+
+super + Print
+    `scrot ~/%Y-%m-%dT%H:%M:%S.png`
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# Brightness Control
+XF86MonBrightness{Down,Up}  
+    brightnessctl s 05%{-,+}
+
+# Volume Control
+XF86Audio{LowerVolume,RaiseVolume}
+	amixer set Master 05%{-,+}
+XF86AudioMute
+    amixer set Master toggle
+
+
+
+#
+# berry hotkeys
+#
+
+super + {h, j, k, l}
+    berryc window_move {-25 0, 0 25, 0 -25, 25 0}
+
+super + shift +  {h, j, k, l}
+    berryc window_resize {-25 0, 0 25, 0 -25, 25 0}
+
+super + {1-9}
+    berryc switch_workspace {0-8}
+
+super + shift + {1-9}
+    berryc send_to_workspace {0-8}
+
+super + f
+    berryc fullscreen
+
+super + Tab
+    berryc cycle_focus
+
+super + shift + q
+    berryc window_close
+
+super + c
+    berryc window_center
+
+~button1
+    berryc pointer_focus

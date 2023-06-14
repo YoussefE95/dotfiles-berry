@@ -1,0 +1,387 @@
+[module/volume]
+type = internal/pulseaudio
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = false
+
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+
+format-volume = <ramp-volume>  <label-volume>
+format-volume-background = ${color.BG}
+format-volume-padding = 1
+
+format-muted = <label-muted>
+format-muted-prefix = "󰖁 "
+format-muted-prefix-font = 2
+format-muted-prefix-foreground = ${color.gray}
+format-muted-background = ${color.BG}
+format-muted-padding = 1
+
+; Available tokens:
+;   %percentage% (default)
+;label-volume = %percentage%%
+
+; Available tokens:
+;   %percentage% (default)
+label-muted = " Mute"
+label-muted-foreground = ${color.gray}
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-4 = 
+ramp-volume-5 = 
+ramp-volume-6 = 
+ramp-volume-7 = 
+ramp-volume-8 = 
+ramp-volume-9 = 
+ramp-volume-font = 2
+ramp-volume-foreground = ${color.cyan}
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/backlight]
+type = internal/xbacklight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
+card = intel_backlight
+
+; Available tags:
+;   <label> (default)
+;   <ramp>
+;   <bar>
+format = <label>
+format-background = ${color.BG}
+format-prefix-foreground= ${color.yellow}
+format-prefix ="  "
+format-padding = 1
+
+label = %percentage%%
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/battery]
+type = internal/battery
+
+; This is useful in case the battery never reports 100% charge
+full-at = 99
+
+; Use the following command to list batteries and adapters:
+; $ ls -1 /sys/class/power_supply/
+battery = ${system.sys_battery}
+adapter = ${system.sys_adapter}
+
+; If an inotify event has not been reported in this many
+; seconds, manually poll for new values.
+;
+; Needed as a fallback for systems that don't report events
+; on sysfs/procfs.
+;
+; Disable polling by setting the interval to 0.
+;
+; Default: 5
+poll-interval = 2
+
+; see "man date" for details on how to format the time string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+; Default: %H:%M:%S
+time-format = %H:%M
+
+; Available tags:
+;   <label-charging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-charging>
+format-charging = <label-charging>
+format-charging-prefix = "󰂄 "
+format-charging-prefix-font = 1
+format-charging-prefix-foreground = ${color.green}
+format-charging-background = ${color.BG}
+
+; Available tags:
+;   <label-discharging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-discharging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-background = ${color.BG}
+
+; Available tags:
+;   <label-full> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;format-full = <ramp-capacity> <label-full>
+
+; Available tokens:
+;   %percentage% (default)
+;   %time%
+;   %consumption% (shows current charge rate in watts)
+
+label-charging = %percentage%%
+
+; Available tokens:
+;   %percentage% (default)
+;   %time%
+;   %consumption% (shows current discharge rate in watts)
+label-discharging = %percentage%%
+
+; Available tokens:
+;   %percentage% (default)
+format-full = <label-full>
+format-full-prefix = "󱐋 "
+format-full-prefix-font = 1
+format-full-prefix-foreground = ${color.green}
+format-full-background = ${color.BG}
+label-full = %percentage%%
+
+; Only applies if <ramp-capacity> is used
+ramp-capacity-0 = 󰂃
+ramp-capacity-1 = 󰁺
+ramp-capacity-2 = 󰁻
+ramp-capacity-3 = 󰁼
+ramp-capacity-4 = 󰁽
+ramp-capacity-5 = 󰁾
+ramp-capacity-6 = 󰁿
+ramp-capacity-7 = 󰁿
+ramp-capacity-8 = 󰂁
+ramp-capacity-9 = 󰂂
+ramp-capacity-foreground = ${color.green}
+ramp-capacity-font = 2
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/cpu]
+type = internal/cpu
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 0.5
+
+; Available tags:
+;   <label> (default)
+;   <bar-load>
+;   <ramp-load>
+;   <ramp-coreload>
+;;format = <label> <ramp-coreload>
+format = <label>
+format-prefix =  
+format-prefix-font = 2
+format-prefix-foreground = ${color.orange}
+format-background = ${color.BG}
+format-padding = 1
+
+; Available tokens:
+;   %percentage% (default) - total cpu load averaged over all cores
+;   %percentage-sum% - Cumulative load on all cores
+;   %percentage-cores% - load percentage for each core
+;   %percentage-core[1-9]% - load percentage for specific core
+label = "  %percentage%%"
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/memory]
+type = internal/memory
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 3
+
+; Available tags:
+;   <label> (default)
+;   <bar-used>
+;   <bar-free>
+;   <ramp-used>
+;   <ramp-free>
+;   <bar-swap-used>
+;   <bar-swap-free>
+;   <ramp-swap-used>
+;   <ramp-swap-free>
+format = <label>
+format-background = ${color.BG}
+format-padding = 1
+
+format-prefix = 
+format-prefix-font = 2
+format-prefix-foreground = ${color.green}
+
+; Available tokens:
+;   %percentage_used% (default)
+;   %percentage_free%
+;   %gb_used%
+;   %gb_free%
+;   %gb_total%
+;   %mb_used%
+;   %mb_free%
+;   %mb_total%
+;   %percentage_swap_used%
+;   %percentage_swap_free%
+;   %mb_swap_total%
+;   %mb_swap_free%
+;   %mb_swap_used%
+;   %gb_swap_total%
+;   %gb_swap_free%
+;   %gb_swap_used%
+
+label = "  %mb_used%"
+
+; Only applies if <ramp-used> is used
+;;ramp-used-0 = 
+;;ramp-used-1 = 
+;;ramp-used-2 = 
+;;ramp-used-3 = 
+;;ramp-used-4 = 
+
+; Only applies if <ramp-free> is used
+;;ramp-free-0 = 
+;;ramp-free-1 = 
+;;ramp-free-2 = 
+;;ramp-free-3 = 
+;;ramp-free-4 = 
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/date]
+type = internal/date
+
+interval = 1.0
+
+date = %A %d %B
+
+format = <label>
+format-prefix = "  "
+format-prefix-font = 1
+format-prefix-foreground = ${color.orange}
+;format-background = ${color.BGL}
+format-foreground = ${color.FG}
+
+label = %date%
+label-font = 5
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/time]
+type = internal/date
+
+; Seconds to sleep between updates
+interval = 1.0
+
+time = %I:%M %p
+
+format = <label>
+format-prefix = "  "
+format-prefix-font = 1
+format-prefix-foreground = ${color.green}
+;format-background = ${color.BG}
+format-foreground = ${color.FG}
+
+label = %time%
+label-font = 5
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+; If you use both a wired and a wireless network, Add both modules in config.ini
+[module/ethernet]
+type = internal/network
+interface = ${system.sys_network_interface}
+
+interval = 1.0
+accumulate-stats = true
+unknown-as-up = true
+
+format-connected = <label-connected>
+format-connected-prefix = "󰈀  "
+format-connected-prefix-foreground = ${color.magenta}
+format-connected-prefix-font = 2
+format-connected-background = ${color.BG}
+format-connected-padding = 1
+
+format-disconnected = <label-disconnected>
+format-disconnected-prefix = "󱐜 "
+format-disconnected-prefix-font = 2
+format-disconnected-foreground = ${color.BGA}
+format-disconnected-background = ${color.BG}
+format-disconnected-padding = 1
+
+label-connected = "%downspeed%, %upspeed%%{A}"
+label-disconnected = "Offline%{A}"
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/network]
+type = internal/network
+interface = ${system.sys_network_interface}
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 1.0
+
+; Accumulate values from all interfaces
+; when querying for up/downspeed rate
+; Default: false
+accumulate-stats = true
+
+; Consider an `UNKNOWN` interface state as up.
+; Some devices have an unknown state, even when they're running
+unknown-as-up = true
+
+format-connected = <ramp-signal> <label-connected>
+format-connected-background = ${color.BG}
+format-connected-padding = 1
+
+format-disconnected = <label-disconnected>
+format-disconnected-prefix = "󰤭 "
+format-disconnected-prefix-font = 1
+format-disconnected-prefix-foreground = ${color.magenta}
+format-disconnected-background = ${color.BG}
+format-disconnected-padding = 1
+
+label-connected = "%{A1:alacritty --command nmtui:} %essid%%{A}"
+
+label-disconnected = "%{A1:alacritty --command nmtui:} Offline%{A}"
+
+ramp-signal-0 = 󰤯
+ramp-signal-1 = 󰤟
+ramp-signal-2 = 󰤢
+ramp-signal-3 = 󰤥
+ramp-signal-4 = 󰤨
+ramp-signal-foreground = ${color.magenta}
+ramp-signal-font = 2
+
+;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/berrywm]
+type = internal/xworkspaces
+
+pin-workspaces = true
+
+enable-click = true
+
+enable-scroll = false
+
+format = <label-state>
+format-background = ${color.BG}
+format-font = 1
+
+label-monitor = %name%
+
+label-active = 
+label-active-foreground = ${color.green}
+
+label-occupied = 
+label-occupied-foreground = ${color.green}
+
+label-urgent = 
+label-urgent-foreground = ${color.red}
+
+label-empty = 
+label-empty-foreground = ${color.gray}
+
+label-active-padding = 1
+label-urgent-padding = 1
+label-occupied-padding = 1
+label-empty-padding = 1

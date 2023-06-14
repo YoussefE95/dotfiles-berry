@@ -1,0 +1,59 @@
+@import 'colors';
+
+*{
+    all: unset;
+    font-family: "IosevkaNerdFontMono";
+    font-family: "SFMono";
+    background-color: $background;
+}
+
+.apps {
+    min-width: 325px;
+    padding: 30px 0px 0px 20px;
+}
+
+.appicon {
+    background-repeat: no-repeat;
+    background-size: 52px;
+    min-height: 52px;
+    min-width: 52px;
+    padding: 5px 10px 5px 10px;
+}
+
+.theme {
+    color: $foreground;
+    font-size: 20px;
+    padding-top: 45px;
+}
+
+.mode-options {
+    padding-left: 25px;
+}
+.active-theme {
+    color: $orange;
+    font-weight: bold;
+}
+
+.active-mode {
+    color: $green;
+    font-weight: bold;
+}
+
+.powermenu-icon {
+    font-size: 48px;
+    font-weight: bold;
+    padding: 0px 5px 0px 5px;
+}
+
+.poweroff {
+    color: $red;
+}
+
+.reboot {
+    color: $orange;
+    padding-left: 8px;
+}
+
+.logout {
+    color: $yellow;
+}
